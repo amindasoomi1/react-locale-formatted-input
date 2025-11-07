@@ -35,7 +35,7 @@ export default function Example() {
         onChange={(e) => setPercent(e.target.value)}
         locale="de-DE"
         format="percent"
-        placeholder="Price..."
+        placeholder="Percent..."
       />
       <LocaleFormattedInput
         value={value}
@@ -45,7 +45,7 @@ export default function Example() {
           thousandSeparator: true,
           maximumFractionDigits: 0,
         }}
-        placeholder="Price..."
+        placeholder="Custom..."
       />
     </>
   );
