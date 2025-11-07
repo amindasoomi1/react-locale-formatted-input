@@ -1,0 +1,59 @@
+{
+  "name": "react-locale-formatted-input",
+  "description": "A locale-aware formatted input component for React. Supports price, percent and custom numeric formats with thousand separators and configurable fraction digits.",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "input",
+    "formatted-input",
+    "format",
+    "locale",
+    "number-format",
+    "currency-input",
+    "price-input",
+    "percent-input",
+    "decimal-input",
+    "thousand-separator",
+    "i18n",
+    "localized-input",
+    "numeric-input",
+    "controlled-input"
+  ],
+  "author": "Amin Dasoomi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amindasoomi1/react-locale-formatted-input.git"
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "pack": "tsc && npm run build && npm pack",
+    "release": "npm run build && npm version patch --no-git-tag-version --no-commit-hooks && npm publish"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.42",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "typescript": "^5.2.2",
+    "vite": "^7.1.12",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  }
+}
