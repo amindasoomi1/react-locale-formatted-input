@@ -1,5 +1,11 @@
 "use client";
-import { ChangeEvent, ComponentProps, useMemo } from "react";
+import {
+  ChangeEvent,
+  ComponentProps,
+  ForwardedRef,
+  forwardRef,
+  useMemo,
+} from "react";
 import formatNumberForLocale from "./formatNumberForLocale";
 import getNumberSeparators from "./getNumberSeparators";
 import replaceNonDigits from "./replaceNonDigits";
@@ -15,13 +21,10 @@ type BaseProps = {
 };
 type Props = BaseProps & Omit<ComponentProps<"input">, keyof BaseProps>;
 
-export default function LocaleFormattedInput({
-  value,
-  onChange,
-  locale = "en-US",
-  format = null,
-  ...props
-}: Props) {
+function LocaleFormattedInput(
+  { value, onChange, locale = "en-US", format = null, ...props }: Props,
+  ref: ForwardedRef<HTMLInputElement>
+) {
   const { groupSeparator, decimalSeparator } = useMemo(() => {
     return getNumberSeparators(locale);
   }, [locale]);
@@ -66,6 +69,7 @@ export default function LocaleFormattedInput({
 
   return (
     <input
+      ref={ref}
       type="text"
       value={formattedValue}
       onChange={handleChange}
@@ -74,3 +78,5 @@ export default function LocaleFormattedInput({
     />
   );
 }
+
+export default forwardRef<HTMLInputElement, Props>(LocaleFormattedInput);
