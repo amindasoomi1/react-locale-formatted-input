@@ -5,6 +5,7 @@ import {
   ForwardedRef,
   forwardRef,
   useMemo,
+  useRef,
 } from "react";
 import formatNumberForLocale from "./formatNumberForLocale";
 import getNumberSeparators from "./getNumberSeparators";
@@ -25,17 +26,30 @@ function LocaleFormattedInput(
   { value, onChange, locale = "en-US", format = null, ...props }: Props,
   ref: ForwardedRef<HTMLInputElement>
 ) {
+  const isFirstLoadRef = useRef(true);
   const { groupSeparator, decimalSeparator } = useMemo(() => {
     return getNumberSeparators(locale);
   }, [locale]);
 
   const formatOptions: FormatOptions = useMemo(() => {
     if (!format)
-      return { thousandSeparator: false, maximumFractionDigits: "auto" };
+      return {
+        thousandSeparator: false,
+        maximumFractionDigits: "auto",
+        padZeros: false,
+      };
     if (format === "percent")
-      return { thousandSeparator: false, maximumFractionDigits: 2 };
+      return {
+        thousandSeparator: false,
+        maximumFractionDigits: 2,
+        padZeros: false,
+      };
     if (format === "price")
-      return { thousandSeparator: true, maximumFractionDigits: 2 };
+      return {
+        thousandSeparator: true,
+        maximumFractionDigits: 2,
+        padZeros: true,
+      };
     return format;
   }, [format]);
 
@@ -46,11 +60,13 @@ function LocaleFormattedInput(
       groupSeparator,
       decimalSeparator,
       formatOptions,
+      isFirstLoad: isFirstLoadRef.current,
     });
     return replacePersianNumbers(result);
   }, [value, locale, groupSeparator, decimalSeparator, formatOptions]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    isFirstLoadRef.current = false;
     const value = replaceNonDigits(replacePersianNumbers(e.target.value));
     const sanitizedValue = sanitizeNumberInput({
       value,

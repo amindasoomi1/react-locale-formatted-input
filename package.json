@@ -1,7 +1,7 @@
 {
   "name": "react-locale-formatted-input",
   "description": "A locale-aware formatted input component for React. Supports price, percent and custom numeric formats with thousand separators and configurable fraction digits.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "pack": "tsc && npm run build && npm pack",
+    "pack": "npm run build && npm pack",
     "release": "npm run build && npm version patch --no-git-tag-version --no-commit-hooks && npm publish"
   },
   "devDependencies": {
